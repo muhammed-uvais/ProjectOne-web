@@ -1,0 +1,72 @@
+<form [formGroup]="Form" >
+<div class="maindiv">
+<div class="headsec">
+  <div class="topbutons">
+    <div class="bottomall-save" (click)="backToList()" >
+        <i class="material-icons">arrow_back</i>
+        <input type="button" value="Back To List" class="btnabv">
+    </div>
+    <div class="bottomall-save"  (click)="Submit()">
+        <input type="button" value="Save" class="btnabv">
+        <i class="material-icons">save</i>
+    </div>
+    <div class="bottomall-save" >
+        <input type="button" value="Reset" class="btnabv">
+        <i class="material-icons">remove</i>
+    </div>
+    <div class="bottomall-save" (click)="DeleteByID()" >
+        <input type="button" value="Delete" class="btnabv">
+        <i class="material-icons">delete</i>
+    </div>
+</div>
+</div>
+<div class="bddiv">
+  <div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+            <label  style="width: 53px;">Name</label>
+            <input class="form-control form-input" type="text" placeholder="--" maxlength="100"
+                formControlName="Name"
+                >
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="pagetitle">
+        <h5>Tax Group Details</h5>
+    </div>
+    <div  formArrayName="TaxGroupChildsList" >
+      <table >
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th >Rate</th>
+                  <!-- <th style="width: 4%;"></th> -->
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of child.controls; let i = index" [formGroup]="item">
+                  <td>
+
+                      <label >VAT</label>
+                  </td>
+                  <td>
+                      <input type="number" maxlength="18" min="0"
+                          formControlName="Rate" class="form-control  rightcls"
+                          [ngClass]="{ 'is-invalid': submitted
+                              && child.controls[i].get('Rate').status != 'VALID'}"/>
+                  </td>
+                  <!-- <td>
+                      <i class="material-icons i-delete"
+                          (click)="RemoveTaxGroupChildsList(i)">delete</i>
+                  </td> -->
+              </tr>
+          </tbody>
+      </table>
+  </div>
+    </div>
+  </div>
+</div>
+</div>
+</form>

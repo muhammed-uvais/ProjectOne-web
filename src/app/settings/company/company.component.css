@@ -1,0 +1,25 @@
+.flxdiv{
+  display: flex;
+  flex-wrap: wrap;
+  margin : 10px 10px 10px 10px;
+}
+.flxdiv div{
+  flex-basis: 33.33%;
+
+}
+.elementcontainer{
+  /* padding: 10px 40px 10px 40px; */
+  padding : 10px 00px;
+}
+.partial-underline {
+  position: relative;
+}
+
+.partial-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px; /* Adjust this value to control the distance between the text and the underline */
+  width: 50%; /* Adjust this value to control the length of the underline */
+  border-bottom: 2px solid blue; /* Adjust the color, style, and thickness of the underline */
+}

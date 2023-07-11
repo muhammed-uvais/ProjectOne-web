@@ -1,0 +1,167 @@
+<form [formGroup]="Form">
+  <div class="maindiv">
+    <div class="headsec">
+      <div class="topbutons">
+        <div class="bottomall-save"  >
+            <i class="material-icons">arrow_back</i>
+            <input type="button" value="Back To List" class="btnabv">
+        </div>
+        <div class="bottomall-save" (click)="Submit()" >
+            <input type="button" value="Save" class="btnabv">
+            <i class="material-icons">save</i>
+        </div>
+        <div class="bottomall-save" >
+            <input type="button" value="Reset" class="btnabv">
+            <i class="material-icons">remove</i>
+        </div>
+    </div>
+    </div>
+    <div class="bddiv">
+      <div class="flxdiv">
+        <div class="elementcontainer">
+          <label>Company Name</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="--"
+            maxlength="50"
+            formControlName="Name"
+          />
+        </div>
+
+        <div class="elementcontainer">
+          <label class="select-lable flxlbl">Website</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="--"
+            maxlength="50"
+            formControlName="Website"
+          />
+        </div>
+        <div class="elementcontainer">
+          <label class="select-lable flxlbl">PhoneNo</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="--"
+            maxlength="20"
+            formControlName="Phone"
+            numbersOnly
+          />
+        </div>
+
+
+        <div class="elementcontainer">
+          <label class="select-lable flxlbl">Fax</label>
+          <input
+            class="form-control"
+            type="email"
+            placeholder="--"
+            maxlength="50"
+            formControlName="Fax"
+          />
+        </div>
+
+        <div class="elementcontainer">
+          <label class="select-lable flxlbl">EmailID</label>
+          <input
+            class="form-control"
+            type="email"
+            placeholder="--"
+            maxlength="50"
+            formControlName="Email"
+          />
+        </div>
+
+        <!-- <div class="elementcontainer">
+          <label class="select-lable flxlbl" style="width: 215px"
+            >Establishment</label
+          >
+          <input
+            class="form-control"
+            type="EstablishmentNo"
+            placeholder="--"
+            maxlength="13"
+            numbersOnly
+            formControlName="EstablishmentNo"
+          />
+        </div> -->
+        <div class="elementcontainer">
+          <label class="select-lable flxlbl">Vat</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="--"
+            maxlength="50"
+            formControlName="VatNumber"
+          />
+          <!-- [ngClass]="{ 'is-invalid': submitted && f.AddressFirst.errors }"> -->
+        </div>
+
+
+
+
+      </div>
+      <div >
+        <div class="pagetitle">
+          <h5>Company Bank Details</h5>
+        </div>
+        <div>
+        <div formArrayName="CompanyMasterBankDetails">
+          <div *ngFor="let item of bank.controls; let i = index" [formGroup]="item">
+            <div class="elementcontainer">
+              <label> Account Name</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="--"
+                formControlName="BankAccountName"
+              />
+            </div>
+            <div class="elementcontainer">
+              <label> Bank Name</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="--"
+              formControlName="BankName"
+              />
+            </div>
+            <div class="elementcontainer">
+              <label> Account Number</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="--"
+              formControlName="BankAccountNumber"
+              />
+            </div>
+            <div class="elementcontainer">
+              <label> IBAN Number</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="--"
+                formControlName="IBANNumber"
+              />
+            </div>
+            <div class="elementcontainer">
+              <label> IFSC Code</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="--"
+              formControlName="BankIFSC"
+              />
+            </div>
+          </div>
+        </div>
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,154 @@
+<div class="invmaindiv">
+<div class="invheadsec">
+  <div>
+    <div class="create-form-button">
+      <i class="material-icons">arrow_back</i>
+      <input  class="formbtn" type="button" value="Back">
+    </div>
+    <div class="create-form-button">
+      <i class="material-icons">save</i>
+      <input  class="formbtn" type="button" value="Save">
+    </div>
+    <!-- <div class="create-form-button">
+      <i class="material-icons">clear</i>
+      <input  class="formbtn" type="button" value="Clear">
+    </div> -->
+  </div>
+<div class="pageheader">
+  <h1>Invoice</h1>
+</div>
+<div class="invnumbrdisply">
+<label>Invoice Number</label>
+<input type="text" class=" form-control">
+</div>
+</div>
+<div class="invbddiv">
+  <mat-accordion>
+
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Invoice Basic Details
+        </mat-panel-title>
+        <mat-panel-description>
+         Open this to see customer and invoice details
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class=" exttb" >
+
+        <div class="container" >
+        <div>
+          <div class="pagetitle">
+            <h5>Customer Details</h5>
+        </div>
+        <div>
+        <div class="address-container">
+          <label>Customer Name</label>
+          <input type="text" class="form-control" style="width: 430px;">
+        </div>
+        <div class="address-container">
+          <label>TRN</label>
+          <input type="text" class="form-control" style="width: 430px;">
+        </div>
+        <div class="address-container">
+          <label>Customer Address</label>
+          <div style="display: flex;">
+            <textarea class="form-control" style="width: 462px;"></textarea>
+            <!-- <input type="text" class="form-control" >
+            <input type="text" class="form-control" > -->
+          </div>
+        </div>
+        </div>
+        </div>
+        <div >
+           <div class="pagetitle">
+          <h5>Invoice Details</h5>
+        </div>
+        <div>
+          <div class="address-container">
+            <label>Invoice Date</label>
+            <input type="date" class="form-control" style="width: 430px;">
+          </div>
+          <div class="address-container" style="pointer-events: none;">
+            <label>TRN</label>
+            <input type="text" class="form-control" style="width: 430px;">
+          </div>
+
+
+        </div>
+        </div>
+
+        </div>
+
+        </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+<div>
+  <div class="pagetitle">
+    <h5>Invoice Details</h5>
+  </div>
+<div>
+<div style="padding: 0px 10px 10px 10px;;height: 300px;overflow: auto;">
+  <table class="itmtable">
+    <thead>
+    <tr>
+      <th style="width: 40px;">Slno</th>
+      <th style="width: 400px;">Description</th>
+      <th style="width: 120px;">Date</th>
+      <th>Qty/Day</th>
+      <th>VAT %</th>
+      <th>Taxable Value (AED)</th>
+      <th>VAT(AED)</th>
+      <th>Total incl.(VAT)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td  style="text-align: center;">h</td>
+      <td style="text-align: center;"><input type="text" class="descitm"></td>
+      <td style="text-align: center;"><input type="date" class="descitm"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
+      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
+    </tr>
+    <tr>
+      <td  style="text-align: center;">h</td>
+      <td style="text-align: center;"><input type="text" class="descitm"></td>
+      <td style="text-align: center;"><input type="date" class="descitm"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
+      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+<div style="float: right;padding: 20px 15px 10px 15px;">
+  <table class="dtltabl">
+    <tr>
+      <th>Taxable Value in AED</th>
+      <td><input type="number" class="descitm" disabled></td>
+    </tr>
+    <tr>
+      <th>VAT @ 5%</th>
+      <td><input type="number" class="descitm" disabled></td>
+    </tr>
+    <tr>
+      <th>Total Amount in AED</th>
+      <td><input type="number" class="descitm" disabled></td>
+    </tr>
+  </table>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>

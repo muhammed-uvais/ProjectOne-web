@@ -1,0 +1,273 @@
+.maindiv{
+  height: 100%;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+}
+.headercontent{
+  background-color: rgb(225, 235, 235);
+}
+.tablearea{
+  background-color: white;
+  padding: 15px;
+  padding-top: 5px;
+  border-radius: 5px;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+
+/* Page title */
+/* ---------------------------------------------------------- */
+.title-holder {
+  border-bottom: 2px solid #f2f2f2;
+  margin-bottom: 10px;
+}
+.table-holder {
+  background-color: white;
+  padding: 15px;
+  padding-top: 5px;
+  border-radius: 5px;
+  margin-left: 45px;
+  margin-right: 45px;
+}
+.list-title {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  margin: 5px;
+}
+/* ---------------------------------------------------------- */
+
+
+/* Table styles */
+/* ---------------------------------------------------------- */
+.mat-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.float-right {
+  float: right;
+}
+/* ---------------------------------------------------------- */
+
+/* Header styles */
+/* ---------------------------------------------------------- */
+.mat-header-cell {
+  background-color: #021d75;
+  color: white;
+}
+.mat-header-cell:not(:first-child) {
+  padding-left: 0;
+}
+
+/* Style just the text in the header */
+.mat-header-cell span {
+  font-weight: 600;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+}
+/* Round the top table corners */
+.mat-header-cell:first-child {
+  border-top-left-radius: 5px;
+}
+.mat-header-cell:last-child {
+  border-top-right-radius: 5px;
+}
+
+.mat-header-row {
+  height: 3em;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.btn-icon {
+  height: 17px;
+  width: 17px;
+  background-color: #393939;
+  border: none;
+}
+
+.sort-icon {
+  height: 17px;
+  width: 17px;
+  color: white;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  position: relative;
+  left: -1.5rem;
+  display: none!important;
+  opacity: 0;
+}
+
+.header {
+  padding: 5px;
+}
+
+/* Column styles */
+/* ---------------------------------------------------------- */
+.type-column {
+  width: 15%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.name-column {
+  width: 30%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.amount-column {
+  width: 15%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.status-column {
+  width: 15%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.date-column {
+  width: 20%;
+  padding-right: 3rem;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.state-column {
+  width: 5%;
+}
+/* ---------------------------------------------------------- */
+
+/* Row styles */
+/* ---------------------------------------------------------- */
+.mat-row:nth-child(2n) {
+  background-color: #d39898;
+}
+/* ---------------------------------------------------------- */
+
+/* Cell styles */
+/* ---------------------------------------------------------- */
+.state-cell {
+  text-align: right;
+}
+.mat-cell {
+  border: none;
+}
+
+.green-svg {
+  fill: #6dd400;
+}
+.gray-svg {
+  fill: #b2b4b6;
+}
+/* ---------------------------------------------------------- */
+.ipsearch{
+  float: right;
+  /* margin: 7px 3px; */
+  padding: 10px 10px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+.ipsearch:hover {
+  border: 1px solid #021d75;
+}
+.create-form-button {
+  border-radius: 4px;
+  background-color: #021d75;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border: 0;
+  float: right;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  margin-top: 11px;
+  padding-left: 3px;
+}
+.formbtn{
+  outline: none;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+.extendtableareaone{
+  margin-top: 30px;
+    margin-bottom: 8px;
+}
+.extendtableareatwo{
+  margin-bottom: 30px;
+}
+.btnalgn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.tblareaheight{
+  height: 400px;
+  overflow: auto;
+}
+.pageheader{
+  font-size: 18px;
+  margin-top: 16px;
+  color: #021d75;
+  font-weight: 500;
+}
+.exttb{
+  display: flex;
+  flex-direction: column;
+}
+
+
+   /* Style the scrollbar */
+   ::-webkit-scrollbar {
+    width: 5px; /* Adjust the width as desired */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Change the background color as desired */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: #021d75; /* Change the handle color as desired */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #021d75; /* Change the handle color on hover as desired */
+}
+
+.hover-red {
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.hover-red:hover {
+  color: red;
+}
+.hover-blue {
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.hover-blue:hover {
+  color: #021d75;
+}
+.even-cell {
+  /* Custom styling for even cells */
+  background-color: lightgray;
+}

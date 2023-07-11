@@ -1,0 +1,19 @@
+<form [formGroup]="Form" (ngSubmit)="onSubmit()">
+<div class="full-screen ">
+
+  <div class="centered ag">
+    <div style="height: 150px;display: flex;align-items: center;justify-content: center;padding:12px;">
+      <img src="/assets/lock.png" alt="My Image" style=" width: 100px;">
+    </div>
+    <div style="padding: 20px;display: flex;flex-direction: column;justify-content: space-between;">
+      <input type="text" placeholder="Username" formControlName="Username">
+      <input type="password" placeholder="Password" formControlName="Password">
+      <div style="display: flex;justify-content: end;">
+        <button class="btn" style="border-radius: 5px;">Login</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</form>
