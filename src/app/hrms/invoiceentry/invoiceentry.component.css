@@ -137,3 +137,15 @@
 .descitm:hover{
   border: 2px solid #021d75;
 }
+.btnadditem{
+  border: none;
+  outline: none;
+background-color: #021d75;
+color: #dddddd;
+padding : 5px 15px;
+border-radius: 5px;
+margin-left: 10px;
+text-align: center;
+font-weight: 700;
+cursor: pointer;
+}

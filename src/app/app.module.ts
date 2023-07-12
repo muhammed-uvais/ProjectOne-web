@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './Core/Helpers/jwt.interceptor';
 import { ResponseInterceptor } from './Core/Helpers/response.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     HttpClientModule,
+    CommonModule,
     AppRoutingModule,ReactiveFormsModule, BrowserAnimationsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

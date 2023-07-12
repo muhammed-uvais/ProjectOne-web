@@ -1,3 +1,4 @@
+<form  [formGroup]="Form">
 <div class="invmaindiv">
 <div class="invheadsec">
   <div>
@@ -5,7 +6,7 @@
       <i class="material-icons">arrow_back</i>
       <input  class="formbtn" type="button" value="Back">
     </div>
-    <div class="create-form-button">
+    <div class="create-form-button" (click)="Submit()">
       <i class="material-icons">save</i>
       <input  class="formbtn" type="button" value="Save">
     </div>
@@ -19,7 +20,7 @@
 </div>
 <div class="invnumbrdisply">
 <label>Invoice Number</label>
-<input type="text" class=" form-control">
+<input type="text" class=" form-control" formControlName="NumberDisplay">
 </div>
 </div>
 <div class="invbddiv">
@@ -68,7 +69,7 @@
         <div>
           <div class="address-container">
             <label>Invoice Date</label>
-            <input type="date" class="form-control" style="width: 430px;">
+            <input type="date" class="form-control" style="width: 430px;" formControlName="EntryDate">
           </div>
           <div class="address-container" style="pointer-events: none;">
             <label>TRN</label>
@@ -94,7 +95,7 @@
   <table class="itmtable">
     <thead>
     <tr>
-      <th style="width: 40px;">Slno</th>
+      <th style="width: 40px;">No</th>
       <th style="width: 400px;">Description</th>
       <th style="width: 120px;">Date</th>
       <th>Qty/Day</th>
@@ -102,32 +103,32 @@
       <th>Taxable Value (AED)</th>
       <th>VAT(AED)</th>
       <th>Total incl.(VAT)</th>
+      <th style="width: 40px;"></th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td  style="text-align: center;">h</td>
-      <td style="text-align: center;"><input type="text" class="descitm"></td>
-      <td style="text-align: center;"><input type="date" class="descitm"></td>
-      <td style="text-align: center;"><input type="number" class="descitm" min="0"></td>
-      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
-      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
-      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
-      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
+  <tbody formArrayName="InvoiceItems" >
+    <tr *ngFor="let cont of invitems.controls; let i = index" [formGroupName]="i">
+      <td  style="text-align: center;">{{ i + 1}}</td>
+      <td style="text-align: center;"><input type="text" class="descitm" formControlName="Description"></td>
+      <td style="text-align: center;"><input type="date" class="descitm" formControlName="Date"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0" formControlName="QtyPerDay"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" disabled formControlName="Vatpercentage"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0" formControlName="TaxableValue" ></td>
+      <td style="text-align: center;"><input type="number" class="descitm" disabled formControlName="Vatamount"></td>
+      <td style="text-align: center;"><input type="number" class="descitm" min="0"  formControlName="TotalAmount"></td>
+      <td style="text-align: center;">
+        <i class="material-icons" style="cursor: pointer;" matTooltip="Delete" matTooltipPosition="below" (click)="DeleteItem(i)"
+         >delete</i>
+
+      </td>
     </tr>
-    <tr>
-      <td  style="text-align: center;">h</td>
-      <td style="text-align: center;"><input type="text" class="descitm"></td>
-      <td style="text-align: center;"><input type="date" class="descitm"></td>
-      <td style="text-align: center;"><input type="number" class="descitm" min="0"></td>
-      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
-      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
-      <td style="text-align: center;"><input type="number" class="descitm" disabled></td>
-      <td style="text-align: center;"><input type="number" class="descitm" min="0" ></td>
-    </tr>
+
   </tbody>
   </table>
 </div>
+<diV>
+  <button  class="btnadditem" (click)="AddInvoiceItem()">Add Item</button>
+</diV>
 <div style="float: right;padding: 20px 15px 10px 15px;">
   <table class="dtltabl">
     <tr>
@@ -152,3 +153,4 @@
 </div>
 
 </div>
+</form>

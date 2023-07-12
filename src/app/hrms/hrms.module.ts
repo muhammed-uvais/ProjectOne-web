@@ -8,6 +8,8 @@ import { HrmsuserdashboardComponent } from './hrmsuserdashboard/hrmsuserdashboar
 import { CreateinvoiceComponent } from './createinvoice/createinvoice.component';
 import { InvoiceentryComponent } from './invoiceentry/invoiceentry.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +22,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
   imports: [
 
     HrmsRoutingModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule
   ]
 })
 export class HrmsModule { }
