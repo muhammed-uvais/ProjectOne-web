@@ -27,7 +27,6 @@ export class TaxgroupComponent implements OnInit {
     })
     this.AddTaxGroupChildsList()
     this.route.queryParams.subscribe(params => {
-      debugger
       if(params['id'] != null){
         this.LoadTaxGroup(params['id'])
       }

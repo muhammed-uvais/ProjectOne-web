@@ -98,4 +98,7 @@ GetDefaultCompany(){
 
   })
 }
+BackTo(){
+  this.router.navigate(['/hrms/hrmdashboard'])
+}
 }

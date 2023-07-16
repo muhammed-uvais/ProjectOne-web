@@ -23,3 +23,6 @@
   width: 50%; /* Adjust this value to control the length of the underline */
   border-bottom: 2px solid blue; /* Adjust the color, style, and thickness of the underline */
 }
+label{
+  font-weight: 500;
+}

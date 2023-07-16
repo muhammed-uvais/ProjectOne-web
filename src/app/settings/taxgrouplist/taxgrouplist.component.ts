@@ -39,6 +39,9 @@ export class TaxgrouplistComponent implements OnInit{
     this.router.navigate(["/settings/taxgroup"],{ queryParams: { id: element.id } })
 
   }
+  Onback(){
+    this.router.navigate(["/hrms/hrmdashboard"])
+  }
   ForDeleteClicked(item : any){
     this.service.DeleteByID(item.id).subscribe(data => {
       console.log(data);

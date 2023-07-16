@@ -2,13 +2,17 @@
 <div class="invmaindiv">
 <div class="invheadsec">
   <div>
-    <div class="create-form-button">
+    <div class="create-form-button" (click)="BackToList()">
       <i class="material-icons">arrow_back</i>
       <input  class="formbtn" type="button" value="Back">
     </div>
     <div class="create-form-button" (click)="Submit()">
       <i class="material-icons">save</i>
       <input  class="formbtn" type="button" value="Save">
+    </div>
+    <div class="create-form-button" (click)="Delete()">
+      <i class="material-icons">delete</i>
+      <input  class="formbtn" type="button" value="Delete">
     </div>
     <!-- <div class="create-form-button">
       <i class="material-icons">clear</i>
@@ -20,7 +24,7 @@
 </div>
 <div class="invnumbrdisply">
 <label>Invoice Number</label>
-<input type="text" class=" form-control" formControlName="NumberDisplay">
+<input type="text" class=" form-controlmse" formControlName="NumberDisplay" style="color:#2a55e0;font-weight: 600;">
 </div>
 </div>
 <div class="invbddiv">
@@ -43,21 +47,21 @@
           <div class="pagetitle">
             <h5>Customer Details</h5>
         </div>
-        <div>
+        <div formGroupName="CustomerDetails">
         <div class="address-container">
           <label>Customer Name</label>
-          <input type="text" class="form-control" style="width: 430px;">
+          <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Name" >
         </div>
         <div class="address-container">
           <label>TRN</label>
-          <input type="text" class="form-control" style="width: 430px;">
+          <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Vatumber" >
         </div>
         <div class="address-container">
           <label>Customer Address</label>
           <div style="display: flex;">
-            <textarea class="form-control" style="width: 462px;"></textarea>
-            <!-- <input type="text" class="form-control" >
-            <input type="text" class="form-control" > -->
+            <textarea class="form-controlmse" style="width: 430px;" formControlName="Address" ></textarea>
+            <!-- <input type="text" class="form-controlmse" >
+            <input type="text" class="form-controlmse" > -->
           </div>
         </div>
         </div>
@@ -69,11 +73,17 @@
         <div>
           <div class="address-container">
             <label>Invoice Date</label>
-            <input type="date" class="form-control" style="width: 430px;" formControlName="EntryDate">
+            <!-- <input type="date" class="form-controlmse" style="width: 430px;" formControlName="EntryDate"> -->
+            <div class="custom-mat-form-field descitm" style="margin-left: 11px;width: 430px;height: 33px;">
+              <input  matInput [matDatepicker]="picker" formControlName="EntryDate"  (click)="openDatePicker(picker)"  #ref1
+            (dateChange)="ChangeEntryDate(ref1.value)"  >
+              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </div>
           </div>
           <div class="address-container" style="pointer-events: none;">
             <label>TRN</label>
-            <input type="text" class="form-control" style="width: 430px;">
+            <input type="text" class="form-controlmse" style="width: 430px;">
           </div>
 
 
@@ -97,8 +107,8 @@
     <tr>
       <th style="width: 40px;">No</th>
       <th style="width: 400px;">Description</th>
-      <th style="width: 120px;">Date</th>
-      <th>Qty/Day</th>
+      <th>Date</th>
+      <th style="width: 90px;">Qty/Day</th>
       <th>VAT %</th>
       <th>Taxable Value (AED)</th>
       <th>VAT(AED)</th>
@@ -110,7 +120,15 @@
     <tr *ngFor="let cont of invitems.controls; let i = index" [formGroupName]="i">
       <td  style="text-align: center;">{{ i + 1}}</td>
       <td style="text-align: center;"><input type="text" class="descitm" formControlName="Description"></td>
-      <td style="text-align: center;"><input type="date" class="descitm" formControlName="Date"></td>
+      <td style="text-align: center;">
+        <div class="custom-mat-form-field descitm">
+          <input matInput [matDatepicker]="picker" formControlName="Date"  (click)="openDatePicker(picker)" #ref44
+          (dateChange)="ChangeDateInvoiceContents(ref44.value,i)"  >
+          <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+      </div>
+      </td>
+
       <td style="text-align: center;"><input type="number" class="descitm" min="0" formControlName="QtyPerDay"></td>
       <td style="text-align: center;"><input type="number" class="descitm" disabled formControlName="Vatpercentage"></td>
       <td style="text-align: center;"><input type="number" class="descitm" min="0" formControlName="TaxableValue" ></td>
