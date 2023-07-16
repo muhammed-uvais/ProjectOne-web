@@ -1,16 +1,16 @@
-<form [formGroup]="Form">
+<form [formGroup]="Form" class="container">
   <div class="maindiv">
     <div class="headsec">
       <div class="topbutons">
-        <div class="bottomall-save"  >
+        <div class="bottomall-save" (click)="BackTo()" >
             <i class="material-icons">arrow_back</i>
-            <input type="button" value="Back To List" class="btnabv">
+            <input type="button" value="Back" class="btnabv">
         </div>
         <div class="bottomall-save" (click)="Submit()" >
             <input type="button" value="Save" class="btnabv">
             <i class="material-icons">save</i>
         </div>
-        <div class="bottomall-save" >
+        <div class="bottomall-save" *ngIf="false" >
             <input type="button" value="Reset" class="btnabv">
             <i class="material-icons">remove</i>
         </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="bddiv">
       <div class="flxdiv">
-        <div class="elementcontainer">
+        <div class="col-sm-6" style="padding-right: 15px;">
           <label>Company Name</label>
           <input
             class="form-control"
@@ -29,7 +29,7 @@
           />
         </div>
 
-        <div class="elementcontainer">
+        <div class="col-sm-6" style="padding-right: 15px;">
           <label class="select-lable flxlbl">Website</label>
           <input
             class="form-control"
@@ -39,7 +39,7 @@
             formControlName="Website"
           />
         </div>
-        <div class="elementcontainer">
+        <div class="col-sm-6" style="padding-right: 15px;">
           <label class="select-lable flxlbl">PhoneNo</label>
           <input
             class="form-control"
@@ -52,7 +52,7 @@
         </div>
 
 
-        <div class="elementcontainer">
+        <div class="col-sm-6" style="padding-right: 15px;">
           <label class="select-lable flxlbl">Fax</label>
           <input
             class="form-control"
@@ -63,7 +63,7 @@
           />
         </div>
 
-        <div class="elementcontainer">
+        <div class="col-sm-6" style="padding-right: 15px;">
           <label class="select-lable flxlbl">EmailID</label>
           <input
             class="form-control"
@@ -87,7 +87,7 @@
             formControlName="EstablishmentNo"
           />
         </div> -->
-        <div class="elementcontainer">
+        <div class="col-sm-6" style="padding-right: 15px;">
           <label class="select-lable flxlbl">Vat</label>
           <input
             class="form-control"
@@ -107,10 +107,10 @@
         <div class="pagetitle">
           <h5>Company Bank Details</h5>
         </div>
-        <div>
+        <div style="padding-left: 10px;">
         <div formArrayName="CompanyMasterBankDetails">
           <div *ngFor="let item of bank.controls; let i = index" [formGroup]="item">
-            <div class="elementcontainer">
+            <div class="col-sm-4">
               <label> Account Name</label>
               <input
                 class="form-control"
@@ -119,7 +119,7 @@
                 formControlName="BankAccountName"
               />
             </div>
-            <div class="elementcontainer">
+            <div class="col-sm-4">
               <label> Bank Name</label>
               <input
                 class="form-control"
@@ -128,7 +128,7 @@
               formControlName="BankName"
               />
             </div>
-            <div class="elementcontainer">
+            <div class="col-sm-4">
               <label> Account Number</label>
               <input
                 class="form-control"
@@ -137,7 +137,7 @@
               formControlName="BankAccountNumber"
               />
             </div>
-            <div class="elementcontainer">
+            <div class="col-sm-4">
               <label> IBAN Number</label>
               <input
                 class="form-control"
@@ -146,7 +146,7 @@
                 formControlName="IBANNumber"
               />
             </div>
-            <div class="elementcontainer">
+            <div class="col-sm-4">
               <label> IFSC Code</label>
               <input
                 class="form-control"

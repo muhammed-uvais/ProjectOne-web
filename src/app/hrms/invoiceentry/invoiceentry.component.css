@@ -134,6 +134,14 @@
   height: 100%;
   padding: 5px
 }
+.mat-input-element {
+  width: 100%;
+  outline: none;
+  border: solid 1px grey;
+  border-radius: 5px;
+  height: 100%;
+  padding: 5px;
+}
 .descitm:hover{
   border: 2px solid #021d75;
 }
@@ -143,9 +151,49 @@
 background-color: #021d75;
 color: #dddddd;
 padding : 5px 15px;
+margin-top: 12px;
 border-radius: 5px;
 margin-left: 10px;
 text-align: center;
-font-weight: 700;
+font-weight: 400;
 cursor: pointer;
+}
+.custom-mat-form-field {
+  /* Add your custom styles here */
+  /* Example styles: */
+  border: 1px solid grey;
+  width: 99%;
+  background-color: transparent;
+  display: flex;
+  padding: 0;
+  align-items: center;
+  height: 26px;
+}
+
+.custom-mat-form-field .mat-form-field-wrapper {
+  /* Remove default input styles */
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}
+
+.custom-mat-form-field .mat-form-field-flex {
+  /* Remove default input styles */
+  display: flex;
+  align-items: center;
+}
+
+.custom-mat-form-field input {
+  /* Add your custom styles for the input element here */
+  /* Example styles: */
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+
+}
+
+label{
+  display: contents;
 }

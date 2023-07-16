@@ -10,7 +10,11 @@ import { InvoiceentryComponent } from './invoiceentry/invoiceentry.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -20,13 +24,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InvoiceentryComponent
   ],
   imports: [
-
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
     HrmsRoutingModule,
     MatExpansionModule,
     MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatCheckboxModule
   ]
 })
 export class HrmsModule { }

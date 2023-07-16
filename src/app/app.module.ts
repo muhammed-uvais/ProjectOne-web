@@ -10,6 +10,7 @@ import { JwtInterceptor } from './Core/Helpers/jwt.interceptor';
 import { ResponseInterceptor } from './Core/Helpers/response.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent
@@ -18,12 +19,12 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     HttpClientModule,
     CommonModule,
-    AppRoutingModule,ReactiveFormsModule, BrowserAnimationsModule,
+    AppRoutingModule,ReactiveFormsModule, BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    {
-      provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true
-      }
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true },
+      { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+
       ],
   bootstrap: [AppComponent]
 })

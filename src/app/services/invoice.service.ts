@@ -13,8 +13,11 @@ export class InvoiceService {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     return this.http.post<any>(this.url + '/CreateInvoice', master, httpOptions)
   }
-  GetAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.url + '/GetAll')
+  GetAll(FromDate :string , ToDate : string): Observable<any[]> {
+    let params = new HttpParams()
+  params = params.append('FromDate', FromDate)
+  params = params.append('ToDate', ToDate)
+    return this.http.get<any[]>(this.url + '/GetAll' , {params})
 }
 
 GetById(id: string): Observable<any> {

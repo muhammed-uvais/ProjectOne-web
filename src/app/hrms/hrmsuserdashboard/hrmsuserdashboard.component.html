@@ -1,9 +1,63 @@
+<div class="container-fluid" style="padding: 0;">
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about" class="split">Help</a>
+  <a class="active" >Invoice List</a>
+<a (click)="NavToInvCreate()"
+class="split" style="border-radius: 5px;margin: 13px 15px 13px 0px;padding: 5px 5px 5px 5px;">Add Invoice</a>
+</div>
+<div style="display: flex;align-items: center;height: 40px;">
+  <div style="flex: 5;display: flex;padding: 10px;">
+  <div class="custom-mat-form-field descitm form-control">
+    <input matInput [matDatepicker]="picker"  [(ngModel)]="FromDate" (click)="openDatePicker(picker)" #ref4 placeholder="From Date"
+     (dateChange)="ChangeFromDate(ref4.value)"
+     >
+    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</div>
+<div class="custom-mat-form-field descitm form-control">
+  <input matInput [matDatepicker]="picker1"
+  [(ngModel)]="ToDate" (click)="openDatePicker(picker1)" #ref44 placeholder="To Date" (dateChange)="ChangeToDate(ref44.value)"
+   >
+  <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</div>
+<div>
+  <button class="btn cpbts" style="padding: 4px 10px 6px 10px;" (click)="GetAll()">Search</button>
+</div>
+</div>
+<div style="padding-right: 5px ;">
+  <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Search"
+  class="form-control">
+</div>
+</div>
+<div>
+
+<div class="scrollable-table">
+
+  <table>
+    <tr style="background-color: antiquewhite;">
+      <th></th>
+      <th>No</th>
+      <th>Invoice</th>
+      <th>EntryDate</th>
+      <th>Customer Name</th>
+    </tr>
+    <tr *ngFor="let item of filteredData; let i = index" >
+      <td>
+        <mat-checkbox [color]="'red'"></mat-checkbox>
+      </td>
+      <td (click)="OnitemClicked(item)">{{ i + 1}}</td>
+      <td (click)="OnitemClicked(item)">{{item.numberDisplay}}</td>
+      <td (click)="OnitemClicked(item)">{{item.entryDate | date:'dd/MM/yyyy'}}</td>
+      <td (click)="OnitemClicked(item)">{{item.customerName}}</td>
+
+    </tr>
+  </table>
+</div>
 </div>
 <div class="footer">
-  <p style="float: right;padding-right: 150px;">Liwa Adventures</p>
+  <p style="float: left;padding-right: 150px;">Liwa Adventures</p>
+  <button  class="logot" style="margin-right: 25px;" (click)="Logout()">Log Out</button>
+  <button  class="cpbts" style="margin-right: 25px;" (click)="NavigateToCompany()">Company Settings</button>
+  <button  class="cpbts" style="margin-right: 25px;" (click)="NavigateToTax()">Tax Settings</button>
+</div>
 </div>
