@@ -37,7 +37,15 @@ export class InvoiceentryComponent implements OnInit {
         Address : [''],
         Vatumber : [''],
         IsActive : [1]
-      })
+      }),
+      InvoiceAmount : this.formbulider.group({
+        Id : [0],
+        InvoiceHdrId : [0],
+        TaxableValue : [0],
+        Vatamount : [0],
+        TotalAmount : [0],
+        IsActive : [1]
+      }),
     })
     console.log(this.Form.value)
     this.route.queryParams.subscribe(params => {

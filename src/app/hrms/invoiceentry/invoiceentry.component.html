@@ -147,19 +147,19 @@
 <diV>
   <button  class="btnadditem" (click)="AddInvoiceItem()">Add Item</button>
 </diV>
-<div style="float: right;padding: 20px 15px 10px 15px;">
+<div style="float: right;padding: 20px 15px 10px 15px;" formGroupName="InvoiceAmount">
   <table class="dtltabl">
     <tr>
       <th>Taxable Value in AED</th>
-      <td><input type="number" class="descitm" disabled></td>
+      <td><input type="number" class="descitm" formControlName="TaxableValue"></td>
     </tr>
     <tr>
       <th>VAT @ 5%</th>
-      <td><input type="number" class="descitm" disabled></td>
+      <td><input type="number" class="descitm" formControlName="Vatamount"></td>
     </tr>
     <tr>
       <th>Total Amount in AED</th>
-      <td><input type="number" class="descitm" disabled></td>
+      <td><input type="number" class="descitm" formControlName="TotalAmount"></td>
     </tr>
   </table>
 </div>
