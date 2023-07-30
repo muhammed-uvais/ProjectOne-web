@@ -197,3 +197,6 @@ cursor: pointer;
 label{
   display: contents;
 }
+.disablee{
+  /* pointer-events: none; */
+}

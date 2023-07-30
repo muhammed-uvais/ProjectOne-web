@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterContentInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResponseInterceptor } from 'src/app/Core/Helpers/response.interceptor';
@@ -12,7 +12,7 @@ import { LoginService } from 'src/app/services/login/login.service';
   templateUrl: './hrmsuserdashboard.component.html',
   styleUrls: ['./hrmsuserdashboard.component.css']
 })
-export class HrmsuserdashboardComponent implements OnInit,AfterContentInit {
+export class HrmsuserdashboardComponent implements OnInit,AfterContentInit,AfterContentChecked {
   datatoshow :any
   invoiceList: any[]=[];
   filteredData :any;
@@ -122,4 +122,8 @@ var formattedDate = new Date(day + "-" + month + "-" + year);
 // Output the formatted date
 return formattedDate
 }
+ngAfterContentChecked(){
+  this.ref.detectChanges();
+}
+
 }

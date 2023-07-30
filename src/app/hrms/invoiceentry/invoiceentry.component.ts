@@ -1,32 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import * as moment from 'moment';
 import { borderTopRightRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 import { TaxgroupService } from 'src/app/services/settings/taxgroup.service';
+import { CompanyService } from 'src/app/services/settings/company.service';
 @Component({
   selector: 'app-invoiceentry',
   templateUrl: './invoiceentry.component.html',
   styleUrls: ['./invoiceentry.component.css']
 })
-export class InvoiceentryComponent implements OnInit {
+export class InvoiceentryComponent implements OnInit,AfterContentChecked {
   Form: FormGroup | any;
   panelOpenState = false;
   taxList: any[] = [];
   SelectedTaxItem : any
+  vatrate: any;
+  pdfData!: Blob;
+  vatNumber: any;
   constructor(private formbulider: FormBuilder,
     private route: ActivatedRoute,
+    private companyservice : CompanyService,
     private service : InvoiceService,
     private taxservice : TaxgroupService,
+    private cdref: ChangeDetectorRef,
     private router: Router,){
 
   }
   get f() { return this.Form.controls; }
   get invitems () { return this.f.InvoiceItems as FormArray; }
-  ngOnInit(): void {
-    this.LoadTax()
+  async ngOnInit() {
+    this.GetVAT()
+   // this.LoadTax()
+
+    //this.LoadTaxasync()
     this.Form = this.formbulider.group({
       Id : [0],
       Number : [0],
@@ -42,6 +51,8 @@ export class InvoiceentryComponent implements OnInit {
         Name : [''],
         Address : [''],
         Vatumber : [''],
+        Phone : [''],
+        Email : [''],
         IsActive : [1]
       }),
       InvoiceAmount : this.formbulider.group({
@@ -53,6 +64,7 @@ export class InvoiceentryComponent implements OnInit {
         IsActive : [1]
       }),
     })
+    await this.LoadTaxsync()
     console.log(this.Form.value)
     this.route.queryParams.subscribe(params => {
       if(params['id'] != null){
@@ -75,6 +87,8 @@ export class InvoiceentryComponent implements OnInit {
       this.f.CustomerDetails.get('Address').setValue(data.customerDetails.address)
       this.f.CustomerDetails.get('Id').setValue(data.customerDetails.id)
       this.f.CustomerDetails.get('Vatumber').setValue(data.customerDetails.vatumber)
+      this.f.CustomerDetails.get('Phone').setValue(data.customerDetails.phone)
+      this.f.CustomerDetails.get('Email').setValue(data.customerDetails.email)
       this.f.CustomerDetails.get('IsActive').setValue(data.customerDetails.isActive)
       this.f.InvoiceAmount.get('Id').setValue(data.invoiceAmount.id)
       this.f.InvoiceAmount.get('InvoiceHdrId').setValue(data.invoiceAmount.invoiceHdrId)
@@ -82,15 +96,15 @@ export class InvoiceentryComponent implements OnInit {
       this.f.InvoiceAmount.get('TaxableValue').setValue(data.invoiceAmount.taxableValue)
       this.f.InvoiceAmount.get('TotalAmount').setValue(data.invoiceAmount.totalAmount)
       this.f.InvoiceAmount.get('Vatamount').setValue(data.invoiceAmount.vatamount)
-
       this.SetInvoiceItemsList(data.invoiceItems)
-     console.log(this.f.value);
-
+      this.CalculateWholeAmounts()
+     // this.disableControlByName('Vatamount')
     })
   }
 DeleteItem(i : any){
   if(this.invitems.length > 1)
   this.invitems.removeAt(i)
+  this.CalculateWholeAmounts()
 }
 SetInvoiceItemsList(item : any){
   const arrayFG = item.map((itm : any) => this.formbulider.group({
@@ -99,6 +113,7 @@ SetInvoiceItemsList(item : any){
     Description : [itm.description],
     Date : [itm.date],
     QtyPerDay : [itm.qtyPerDay],
+    Price : [itm.price],
     Vatpercentage : [itm.vatpercentage],
     TaxableValue : [itm.taxableValue],
     Vatamount: [itm.vatamount],
@@ -116,9 +131,10 @@ SetInvoiceItemsList(item : any){
       Description : [''],
       Date : [new Date()],
       QtyPerDay : [0],
-      Vatpercentage : [0],
+      Price : [0],
+      Vatpercentage : [this.vatrate],
       TaxableValue : [0],
-      Vatamount: [0],
+      Vatamount:  [0],
       TotalAmount : [0],
       IsActive : [1],
     }))
@@ -175,9 +191,10 @@ SetInvoiceItemsList(item : any){
       else{
         this.f.SelectedTaxId.setValue(this.taxList[0].id)
       }
-      this.SelectedTax()
+      this.vatrate = this.SelectedTax()
     })
   }
+
 
   GetVat5(){
     var item = this.taxList.find(x => x.name.includes('5' ))
@@ -193,4 +210,110 @@ SetInvoiceItemsList(item : any){
    }
 
   }
+
+async LoadTaxsync() {
+
+
+  try {
+    this.taxList = await this.taxservice.GetAll1();
+    console.log('1');
+    if(this.taxList){
+      var k = this.GetVat5()
+      if( k != undefined){
+        this.f.SelectedTaxId.setValue(k.id)
+        this.vatrate = this.SelectedTax()
+      }
+      else{
+        this.f.SelectedTaxId.setValue(this.taxList[0].id)
+      }
+    }
+
+  } catch (error) {
+
+    // Handle the error
+  }
 }
+ngAfterContentChecked(){
+  this.cdref.detectChanges();
+}
+ calculateSumOfProperty(formArray: FormArray, propertyName: string): number {
+  let sum = 0;
+
+  // Loop through each control in the FormArray
+  for (let i = 0; i < formArray.length; i++) {
+    const control = formArray.at(i);
+
+    // Get the value of the specified property and add it to the sum
+    const propertyValue = control.get(propertyName)?.value;
+    if (typeof propertyValue === 'number') {
+      sum += propertyValue;
+    }
+  }
+
+  return sum;
+}
+PriceChange(item : any , i : number){
+let itemPrice = 0;
+
+itemPrice = (item.value.QtyPerDay  * item.value.Price);
+this.invitems?.at(i)?.get('TaxableValue')?.setValue(itemPrice)
+this.CalculateInlineAmount(item,i)
+}
+CalculateInlineAmount(item : any , i : number){
+  console.log(item.value);
+  console.log(i);
+// item.value.TaxableValue +  ((item.value.Vatpercentage / item.value.TaxableValue) * 100 )
+let vatAmt = 0;
+let TotalAmt = 0;
+vatAmt = ((item.value.Vatpercentage / 100 ) * item.value.TaxableValue );
+TotalAmt = item.value.TaxableValue + vatAmt;
+this.invitems?.at(i)?.get('Vatamount')?.setValue(vatAmt)
+this.invitems?.at(i)?.get('TotalAmount')?.setValue(TotalAmt)
+this.CalculateWholeAmounts()
+}
+CalculateWholeAmounts(){
+  let TotalTaxableAmt = 0;
+  let totalVatAmt = 0;
+  let totalTotalAmt = 0;
+  let totalTotalAmtFinal = 0;
+  TotalTaxableAmt = this.calculateSumOfProperty(this.invitems,'TaxableValue')
+  totalVatAmt = this.calculateSumOfProperty(this.invitems,'Vatamount')
+  totalTotalAmt = this.calculateSumOfProperty(this.invitems,'TotalAmount')
+
+  this.f.InvoiceAmount.get('TaxableValue').setValue(TotalTaxableAmt)
+  this.f.InvoiceAmount.get('Vatamount').setValue(totalVatAmt)
+  this.f.InvoiceAmount.get('TotalAmount').setValue(totalTotalAmt)
+}
+disableControlByName(controlName: string) {
+  this.invitems.controls.forEach(element => {
+    element.get(controlName)?.disable()
+  });
+}
+
+PDF() {
+  this.service.GetPdf(this.f.Id.value).subscribe(response => {
+    this.pdfData = response;this.downloadPDF()
+    //this.displayPDF();
+  }, error => {
+    console.error('Error fetching PDF:', error);
+  });
+}
+
+displayPDF() {
+  const fileURL = URL.createObjectURL(this.pdfData);
+}
+downloadPDF() {
+  const downloadLink = document.createElement('a');
+  downloadLink.href = URL.createObjectURL(this.pdfData);
+  downloadLink.download = 'Invoice.pdf'; // Replace 'your-pdf-file-name' with the desired file name
+  downloadLink.click();
+}
+GetVAT(){
+
+  this.companyservice.GetDefaultCompany().subscribe(data => {
+    console.log(data);
+    this.vatNumber = data.vatNumber
+  })
+}
+}
+

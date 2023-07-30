@@ -13,7 +13,10 @@ export class TaxgroupService {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
     return this.http.post<any>(this.url + '/CreateTaxGroup', master, httpOptions)
   }
-  GetAll(): Observable<any[]> {
+  GetAll1():Promise<any> {
+    return this.http.get<any[]>(this.url + '/GetTaxGroup').toPromise()
+  }
+  GetAll():Observable<any[]> {
     return this.http.get<any[]>(this.url + '/GetTaxGroup')
   }
   GetById(id: string): Observable<any> {
@@ -28,4 +31,28 @@ export class TaxgroupService {
     params = params.append('id', id)
     return this.http.get<any>(this.url + '/DeleteByID', {params})
   }
+  GetAllPromsie(){
+    return new Promise((resolve, reject) => {
+      try {
+        let apiUrl = `${this.url}/GetTaxGroup`;
+        this.http.get(apiUrl).toPromise().then(res =>
+          {
+
+            console.log(res);
+            resolve(res);
+
+          },
+
+          msg => { // Error
+            reject(msg);
+          }
+          )
+      } catch (error) {
+        return error
+      }
+
+    });
+  }
+
+
 }
