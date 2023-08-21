@@ -7,19 +7,32 @@ import * as moment from 'moment';
 import { borderTopRightRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 import { TaxgroupService } from 'src/app/services/settings/taxgroup.service';
 import { CompanyService } from 'src/app/services/settings/company.service';
+import { borderRightStyle } from 'html2canvas/dist/types/css/property-descriptors/border-style';
+import { Observable, map, startWith } from 'rxjs';
+interface CustomerDetailsList {
+  Id: number;
+  Name: string;
+  Address: string;
+  Email: string;
+  Phone: string;
+  Vatumber: string;
+}
 @Component({
   selector: 'app-invoiceentry',
   templateUrl: './invoiceentry.component.html',
   styleUrls: ['./invoiceentry.component.css']
 })
 export class InvoiceentryComponent implements OnInit,AfterContentChecked {
+  AutocmpCtrl = new FormControl();
   Form: FormGroup | any;
   panelOpenState = false;
   taxList: any[] = [];
+  customerList : any[]=[]
   SelectedTaxItem : any
   vatrate: any;
   pdfData!: Blob;
   vatNumber: any;
+  CustomerDetailList!: Observable<any[]>;
   constructor(private formbulider: FormBuilder,
     private route: ActivatedRoute,
     private companyservice : CompanyService,
@@ -32,6 +45,11 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
   get f() { return this.Form.controls; }
   get invitems () { return this.f.InvoiceItems as FormArray; }
   async ngOnInit() {
+    this.GetCustomerByName('fetchall')
+    this.CustomerDetailList = this.AutocmpCtrl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
     this.GetVAT()
    // this.LoadTax()
 
@@ -315,5 +333,37 @@ GetVAT(){
     this.vatNumber = data.vatNumber
   })
 }
+GetCustomerByName(name : string){
+  this.service.GetCustomerSearchByName(name).subscribe(data =>{
+    console.log(data);
+    this.customerList = []
+    this.customerList = data
+
+  })
+}
+// get CustomerDetailList() : CustomerDetailsList[]{
+// const ip = this.AutocmpCtrl.value
+// const filterValue = ip ? ip.toLowerCase() : '';
+// if(filterValue != ""){
+//   this.GetCustomerByName(filterValue)
+//   return this.customerList
+// //   return this.customerList.filter((option: any) =>
+// //   option.name.trim().toLowerCase().includes(filterValue)
+// // );
+// }
+// else{
+//   return this.customerList
+// }
+// }
+
+private _filter(value: string): string[] {
+  const filterValue = this._normalizeValue(value);
+  return this.customerList.filter(street => this._normalizeValue(street.name).includes(filterValue));
+}
+
+private _normalizeValue(value: string): string {
+  return value.toLowerCase().replace(/\s/g, '');
+}
+
 }
 

@@ -48,4 +48,9 @@ GetPdf(Id: any): Observable<Blob> {
       })
     );
 }
+GetCustomerSearchByName(customerName: string): Observable<any> {
+  let params = new HttpParams()
+  params = params.append('customerName', customerName)
+  return this.http.get<any>(this.url + '/CustomerSearchByName', {params})
+}
 }

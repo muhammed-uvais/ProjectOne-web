@@ -53,6 +53,18 @@
         </div>
         <div formGroupName="CustomerDetails">
         <div class="address-container">
+          <div>
+            <input type="text"
+            placeholder="Search for a customer"
+            [formControl]="AutocmpCtrl"
+            [matAutocomplete]="auto"
+            class="example-input">
+     <mat-autocomplete #auto="matAutocomplete">
+       <mat-option *ngFor="let customer of CustomerDetailList | async" [value]="customer.name">
+         {{customer.name}}
+       </mat-option>
+     </mat-autocomplete>
+          </div>
           <label>Customer Name</label>
           <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Name" >
         </div>
