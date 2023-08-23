@@ -13,7 +13,6 @@ export class ResponseInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    debugger
     if (this.isExcludedUrl(req.url)) {
       // Pass the request through without intercepting
       return next.handle(req);

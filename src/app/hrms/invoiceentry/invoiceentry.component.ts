@@ -9,6 +9,7 @@ import { TaxgroupService } from 'src/app/services/settings/taxgroup.service';
 import { CompanyService } from 'src/app/services/settings/company.service';
 import { borderRightStyle } from 'html2canvas/dist/types/css/property-descriptors/border-style';
 import { Observable, map, startWith } from 'rxjs';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 interface CustomerDetailsList {
   Id: number;
   Name: string;
@@ -57,6 +58,8 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
     this.Form = this.formbulider.group({
       Id : [0],
       Number : [0],
+      DisableTRN : [false],
+      InvoiceCustomerDetailsId : [0],
       NumberDisplay : [''],
       CreatedDate : [new Date],
       EntryDate : [(new Date)],
@@ -95,13 +98,14 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
     this.service.GetById(id).subscribe(data => {
       console.log(data);
       this.f.Id.setValue(data.id)
+      this.f.DisableTRN.setValue(data.disableTrn == 1 ? true : false)
       this.f.Number.setValue(data.number)
       this.f.NumberDisplay.setValue(data.numberDisplay)
+      this.f.InvoiceCustomerDetailsId.setValue(data.invoiceCustomerDetailsId)
       this.f.CreatedDate.setValue((data.createdDate))
       this.f.IsActive.setValue(data.isActive)
       this.f.EntryDate.setValue(data.entryDate)
       this.f.CustomerDetails.get('Name').setValue(data.customerDetails.name)
-      this.f.CustomerDetails.get('InvoiceHdrId').setValue(data.customerDetails.invoiceHdrId)
       this.f.CustomerDetails.get('Address').setValue(data.customerDetails.address)
       this.f.CustomerDetails.get('Id').setValue(data.customerDetails.id)
       this.f.CustomerDetails.get('Vatumber').setValue(data.customerDetails.vatumber)
@@ -158,8 +162,10 @@ SetInvoiceItemsList(item : any){
     }))
   }
   Submit(){
+    debugger
     console.log(this.Form.value);
     let obj = this.Form.value
+    obj.DisableTRN = obj.DisableTRN == true ? 1 : 0
     //obj.EntryDate = moment.utc(obj.EntryDate).toISOString();
     this.service.Create(obj).subscribe(data => {
       if(data.isSuccess){
@@ -362,8 +368,36 @@ private _filter(value: string): string[] {
 }
 
 private _normalizeValue(value: string): string {
+  if(typeof(value) === 'object'){
+    return ""
+  }
   return value.toLowerCase().replace(/\s/g, '');
 }
+handleOptionSelected(event : MatAutocompleteSelectedEvent){
+this.customerDetailsClear()
+this.AutocmpCtrl.setValue(event.option.value.name)
+let customerDetails = event.option.value
+this.f.CustomerDetails.get('Name').setValue(customerDetails.name)
+this.f.CustomerDetails.get('InvoiceHdrId').setValue(customerDetails.invoiceHdrId)
+this.f.CustomerDetails.get('Address').setValue(customerDetails.address)
+this.f.CustomerDetails.get('Id').setValue(customerDetails.id)
+this.f.CustomerDetails.get('Vatumber').setValue(customerDetails.vatumber)
+this.f.CustomerDetails.get('Phone').setValue(customerDetails.phone)
+this.f.CustomerDetails.get('Email').setValue(customerDetails.email)
+this.f.CustomerDetails.get('IsActive').setValue(customerDetails.isActive)
 
+
+}
+customerDetailsClear(){
+this.AutocmpCtrl.setValue('')
+this.f.CustomerDetails.get('Name').setValue('')
+this.f.CustomerDetails.get('InvoiceHdrId').setValue('')
+this.f.CustomerDetails.get('Address').setValue('')
+this.f.CustomerDetails.get('Id').setValue('')
+this.f.CustomerDetails.get('Vatumber').setValue('')
+this.f.CustomerDetails.get('Phone').setValue('')
+this.f.CustomerDetails.get('Email').setValue('')
+this.f.CustomerDetails.get('IsActive').setValue('')
+}
 }
 

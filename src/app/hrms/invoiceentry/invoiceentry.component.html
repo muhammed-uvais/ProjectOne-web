@@ -54,17 +54,24 @@
         <div formGroupName="CustomerDetails">
         <div class="address-container">
           <div>
-            <input type="text"
+          <div>
+            <input type="text" style="width: 300px;"
             placeholder="Search for a customer"
             [formControl]="AutocmpCtrl"
             [matAutocomplete]="auto"
-            class="example-input">
-     <mat-autocomplete #auto="matAutocomplete">
-       <mat-option *ngFor="let customer of CustomerDetailList | async" [value]="customer.name">
+            class="form-controlmse">
+     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handleOptionSelected($event)">
+       <mat-option *ngFor="let customer of CustomerDetailList | async" [value]="customer">
          {{customer.name}}
        </mat-option>
      </mat-autocomplete>
+     <div class="create-form-button" (click)="customerDetailsClear()" style="float: right;">
+      <i class="material-icons">clear</i>
+      <input  class="formbtn" type="button" value="Clear Search">
+    </div>
           </div>
+
+        </div>
           <label>Customer Name</label>
           <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Name" >
         </div>
@@ -72,14 +79,14 @@
           <label>TRN</label>
           <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Vatumber"  >
         </div>
-        <div class="address-container">
+        <!-- <div class="address-container">
           <label>Phone</label>
           <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Phone"  >
         </div>
         <div class="address-container">
           <label>Email</label>
           <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Email"  >
-        </div>
+        </div> -->
         <div class="address-container">
           <label>Customer Address</label>
           <div style="display: flex;">
@@ -108,6 +115,9 @@
           <div class="address-container" style="pointer-events: none;">
             <label>TRN</label>
             <input type="text" class="form-controlmse"   [value]="vatNumber"  style="color:#2a55e0;font-weight: 600;width: 430px;" >
+          </div>
+          <div>
+            <mat-checkbox [color]="'primary'"  formControlName="DisableTRN" >Disable TRN</mat-checkbox>
           </div>
 
 
