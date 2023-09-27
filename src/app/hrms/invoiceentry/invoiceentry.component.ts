@@ -81,6 +81,7 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
         InvoiceHdrId : [0],
         TaxableValue : [0],
         Vatamount : [0],
+        Vatexcludedamount : [0],
         TotalAmount : [0],
         IsActive : [1]
       }),
@@ -118,6 +119,7 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
       this.f.InvoiceAmount.get('TaxableValue').setValue(data.invoiceAmount.taxableValue)
       this.f.InvoiceAmount.get('TotalAmount').setValue(data.invoiceAmount.totalAmount)
       this.f.InvoiceAmount.get('Vatamount').setValue(data.invoiceAmount.vatamount)
+      this.f.InvoiceAmount.get('Vatexcludedamount').setValue(data.invoiceAmount.vatexcludedamount)
       this.SetInvoiceItemsList(data.invoiceItems)
       this.CalculateWholeAmounts()
      // this.disableControlByName('Vatamount')
@@ -136,6 +138,8 @@ SetInvoiceItemsList(item : any){
     Date : [itm.date],
     QtyPerDay : [itm.qtyPerDay],
     Price : [itm.price],
+    Parking : [itm.parking],
+    Salik : [itm.salik],
     Vatpercentage : [itm.vatpercentage],
     TaxableValue : [itm.taxableValue],
     Vatamount: [itm.vatamount],
@@ -153,6 +157,8 @@ SetInvoiceItemsList(item : any){
       Description : [''],
       Date : [new Date()],
       QtyPerDay : [0],
+      Parking : [0],
+      Salik : [0],
       Price : [0],
       Vatpercentage : [this.vatrate],
       TaxableValue : [0],
@@ -278,19 +284,19 @@ ngAfterContentChecked(){
 }
 PriceChange(item : any , i : number){
 let itemPrice = 0;
-
+let itemTaxableTotal = 0;
 itemPrice = (item.value.QtyPerDay  * item.value.Price);
-this.invitems?.at(i)?.get('TaxableValue')?.setValue(itemPrice)
+itemTaxableTotal = itemPrice + item.value.Parking;
+
+this.invitems?.at(i)?.get('TaxableValue')?.setValue(itemTaxableTotal);
 this.CalculateInlineAmount(item,i)
 }
 CalculateInlineAmount(item : any , i : number){
-  console.log(item.value);
-  console.log(i);
-// item.value.TaxableValue +  ((item.value.Vatpercentage / item.value.TaxableValue) * 100 )
+
 let vatAmt = 0;
 let TotalAmt = 0;
 vatAmt = ((item.value.Vatpercentage / 100 ) * item.value.TaxableValue );
-TotalAmt = item.value.TaxableValue + vatAmt;
+TotalAmt = item.value.TaxableValue + vatAmt + item.value.Salik;
 this.invitems?.at(i)?.get('Vatamount')?.setValue(vatAmt)
 this.invitems?.at(i)?.get('TotalAmount')?.setValue(TotalAmt)
 this.CalculateWholeAmounts()
@@ -300,12 +306,15 @@ CalculateWholeAmounts(){
   let totalVatAmt = 0;
   let totalTotalAmt = 0;
   let totalTotalAmtFinal = 0;
+  let totalVAtExclued = 0;
   TotalTaxableAmt = this.calculateSumOfProperty(this.invitems,'TaxableValue')
   totalVatAmt = this.calculateSumOfProperty(this.invitems,'Vatamount')
   totalTotalAmt = this.calculateSumOfProperty(this.invitems,'TotalAmount')
+  totalVAtExclued = this.calculateSumOfProperty(this.invitems,'Salik')
 
   this.f.InvoiceAmount.get('TaxableValue').setValue(TotalTaxableAmt)
   this.f.InvoiceAmount.get('Vatamount').setValue(totalVatAmt)
+  this.f.InvoiceAmount.get('Vatexcludedamount').setValue(totalVAtExclued)
   this.f.InvoiceAmount.get('TotalAmount').setValue(totalTotalAmt)
 }
 disableControlByName(controlName: string) {
