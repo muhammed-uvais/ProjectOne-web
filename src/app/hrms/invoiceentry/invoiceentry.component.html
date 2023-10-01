@@ -1,20 +1,20 @@
 <form  [formGroup]="Form" class="container-fluid">
-<div class="invmaindiv">
-<div class="invheadsec">
-  <div>
+<div class="invmaindiv" style="overflow: auto;">
+<div class="invheadsec paddingbtns">
+  <div >
     <div class="create-form-button" (click)="BackToList()">
       <i class="material-icons">arrow_back</i>
       <input  class="formbtn" type="button" value="Back">
     </div>
-    <div class="create-form-button" (click)="Submit()">
+    <div class="create-form-button hidebtn" (click)="Submit()">
       <i class="material-icons">save</i>
       <input  class="formbtn" type="button" value="Save">
     </div>
-    <div class="create-form-button" (click)="Delete()">
+    <div class="create-form-button hidebtn " (click)="Delete()">
       <i class="material-icons">delete</i>
       <input  class="formbtn" type="button" value="Delete">
     </div>
-    <div class="create-form-button" (click)="PDF()">
+    <div class="create-form-button hidebtn" (click)="PDF()">
       <i class="material-icons">print</i>
       <input  class="formbtn" type="button" value="PDF">
     </div>
@@ -23,11 +23,11 @@
       <input  class="formbtn" type="button" value="Clear">
     </div> -->
   </div>
-<div class="pageheader">
+<div class="pageheader hidebtn">
   <h1>Invoice</h1>
 </div>
 <div class="invnumbrdisply">
-<label>Invoice Number</label>
+<label class="hidebtn">Invoice Number</label>
 <input type="text" class=" form-controlmse" formControlName="NumberDisplay" style="color:#2a55e0;font-weight: 600;">
 </div>
 </div>
@@ -143,7 +143,7 @@
   </div>
 </div>
 <div>
-<div style="padding: 0px 10px 10px 10px;;height: 300px;overflow: auto;">
+<div  class="tablediv">
   <table class="itmtable">
     <thead>
     <tr>
@@ -195,32 +195,53 @@
 <diV>
   <button  class="btnadditem" (click)="AddInvoiceItem()">Add Item</button>
 </diV>
-<div style="float: right;padding: 20px 15px 10px 15px;" formGroupName="InvoiceAmount">
-  <table class="dtltabl" (focusout)="CalculateWholeAmounts()" >
-    <tr>
-      <th>Taxable Value in AED</th>
-      <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="TaxableValue"></td>
-    </tr>
-    <tr>
-      <th>VAT @ 5%</th>
-      <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="Vatamount"></td>
-    </tr>
-    <tr>
-      <th>Tax Excluded Items</th>
-      <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="Vatexcludedamount"></td>
-    </tr>
-    <tr>
-      <th>Total Amount in AED</th>
-      <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="TotalAmount"></td>
-    </tr>
-  </table>
-</div>
+
 </div>
 
 
 
 </div>
 </div>
+<div class="invbddiv">
+  <div>
+    <div style="float: right;padding: 20px 15px 10px 15px;" formGroupName="InvoiceAmount">
+      <table class="dtltabl" (focusout)="CalculateWholeAmounts()" >
+        <tr>
+          <th>Taxable Value in AED</th>
+          <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="TaxableValue"></td>
+        </tr>
+        <tr>
+          <th>VAT @ 5%</th>
+          <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="Vatamount"></td>
+        </tr>
+        <tr>
+          <th>Tax Excluded Items</th>
+          <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="Vatexcludedamount"></td>
+        </tr>
+        <tr>
+          <th>Total Amount in AED</th>
+          <td><input type="number" class="descitm" style="width: 200px;text-align: right;color: #2a55e0;font-weight: 600;" formControlName="TotalAmount"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
+</div>
+<div class="invheadsec hidefooterbtns paddingbtns">
+  <div >
+    <div class="create-form-button " (click)="Submit()">
+      <i class="material-icons">save</i>
+      <input  class="formbtn" type="button" value="Save">
+    </div>
+    <div class="create-form-button  " (click)="Delete()">
+      <i class="material-icons">delete</i>
+      <input  class="formbtn" type="button" value="Delete">
+    </div>
+    <div class="create-form-button " (click)="PDF()">
+      <i class="material-icons">print</i>
+      <input  class="formbtn" type="button" value="PDF">
+    </div>
+  </div>
+</div>
 </div>
 </form>

@@ -39,9 +39,27 @@ outline:none;
 border: 1px solid white;
 margin :10px 0px;
 cursor:pointer;
+background-color: black;
+color: #ecebee;
+transition: 0.5s ease-in-out;
 }
 
-.btn:hover {
-  background-color: rgba(107, 107, 126, 0.842);
-  color: rgb(39, 37, 37);
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #ecebee;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    rgb(244, 244, 245),
+    rgba(37, 117, 252, 1)
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(
+    to right,
+    rgb(234, 232, 235),
+    rgba(37, 117, 252, 1)
+  );
 }

@@ -24,6 +24,8 @@ interface CustomerDetailsList {
   styleUrls: ['./invoiceentry.component.css']
 })
 export class InvoiceentryComponent implements OnInit,AfterContentChecked {
+  screenWidth!: number;
+  screenHeight!: number;
   AutocmpCtrl = new FormControl();
   Form: FormGroup | any;
   panelOpenState = false;
@@ -407,6 +409,9 @@ this.f.CustomerDetails.get('Vatumber').setValue('')
 this.f.CustomerDetails.get('Phone').setValue('')
 this.f.CustomerDetails.get('Email').setValue('')
 this.f.CustomerDetails.get('IsActive').setValue('')
+}
+returnClass(){
+
 }
 }
 
