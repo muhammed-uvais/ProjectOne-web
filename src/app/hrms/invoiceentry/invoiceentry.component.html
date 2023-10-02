@@ -129,8 +129,11 @@
           <h5>Invoice Details</h5>
         </div>
         <div>
+          <mat-checkbox [color]="'primary'"  formControlName="DisableTRN" >Disable TRN</mat-checkbox>
+        </div>
+        <div>
           <div class="address-container">
-            <!-- <input type="date" class="form-control"  formControlName="EntryDate"> -->
+            <div>
             <label>Invoice Date</label>
             <div class="form-control custom-mat-form-fieldq">
               <input  [matDatepicker]="picker" #ref1 formControlName="EntryDate"
@@ -140,20 +143,13 @@
               </mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
           </div>
-            <div class="custom-mat-form-field descitm" style="margin-left: 11px;width: 288px;height: 33px;" *ngIf="false">
-              <input  matInput [matDatepicker]="picker" formControlName="EntryDate"  (click)="openDatePicker(picker)"  #ref1
-            (dateChange)="ChangeEntryDate(ref1.value)"  >
-              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-          </div>
+        </div>
           </div>
           <div class="address-container" style="pointer-events: none;">
             <label>TRN</label>
             <input type="text" class="form-control"   [value]="vatNumber"  style="color:#2a55e0;font-weight: 600;width: 300px;" >
           </div>
-          <div>
-            <mat-checkbox [color]="'primary'"  formControlName="DisableTRN" >Disable TRN</mat-checkbox>
-          </div>
+
 
 
         </div>
