@@ -24,8 +24,8 @@ interface CustomerDetailsList {
   styleUrls: ['./invoiceentry.component.css']
 })
 export class InvoiceentryComponent implements OnInit,AfterContentChecked {
-  screenWidth!: number;
-  screenHeight!: number;
+  selectedItem : any;
+  public keyword = 'name';
   AutocmpCtrl = new FormControl();
   Form: FormGroup | any;
   panelOpenState = false;
@@ -36,6 +36,7 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
   pdfData!: Blob;
   vatNumber: any;
   CustomerDetailList!: Observable<any[]>;
+  CustomerData : any[] = []
   constructor(private formbulider: FormBuilder,
     private route: ActivatedRoute,
     private companyservice : CompanyService,
@@ -48,11 +49,12 @@ export class InvoiceentryComponent implements OnInit,AfterContentChecked {
   get f() { return this.Form.controls; }
   get invitems () { return this.f.InvoiceItems as FormArray; }
   async ngOnInit() {
-    this.GetCustomerByName('fetchall')
-    this.CustomerDetailList = this.AutocmpCtrl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
-    );
+      this.StylePerScreen()
+    //this.GetCustomerByName('fetchall')
+    // this.CustomerDetailList = this.AutocmpCtrl.valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value || '')),
+    // );
     this.GetVAT()
    // this.LoadTax()
 
@@ -412,6 +414,39 @@ this.f.CustomerDetails.get('IsActive').setValue('')
 }
 returnClass(){
 
+}
+selectEvent(item : any) {
+  // do something with selected item
+}
+
+onChangeSearch(val: string) {
+  // fetch remote data from here
+  // And reassign the 'data' which is binded to 'data' property.
+  console.log(val);
+
+}
+
+onFocused(e : any){
+  // do something when input is focused
+}
+Search(){
+if(this.AutocmpCtrl.value === ""){
+  this.CustomerData = []
+}
+this.service.GetCustomerSearchByName(this.AutocmpCtrl.value).subscribe(data => {
+this.CustomerData = data
+})
+}
+StylePerScreen(){
+  let screenWidth = window.innerWidth;
+  let screenHeight = window.innerHeight;
+  console.log(screenWidth,screenHeight);
+  if(screenWidth >= 300 && screenWidth <=900 ){
+    return "container-fluid"
+  }
+  else{
+    return "container"
+  }
 }
 }
 

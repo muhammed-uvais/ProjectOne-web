@@ -241,3 +241,37 @@ label{
     display: none;
   }
 }
+
+.ng-autocomplete {
+  width:100%;
+  max-width: 600px;
+  display: table;
+  margin: 0 auto;
+}
+.address-container .aprvl-auto .ng-autocomplete .autocomplete-container{
+  box-shadow: none !important;
+}
+.custom-mat-form-fieldq {
+  padding: 0px 0px 0px 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height : 40px;
+  width: 300px;
+  }
+
+.custom-mat-form-fieldq input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+::ng-deep .mat-datepicker-toggle button{
+  border-radius: 0px 4px 4px 0px;
+  padding: 0px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

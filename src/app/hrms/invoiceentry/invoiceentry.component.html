@@ -27,8 +27,8 @@
   <h1>Invoice</h1>
 </div>
 <div class="invnumbrdisply">
-<label class="hidebtn">Invoice Number</label>
-<input type="text" class=" form-controlmse" formControlName="NumberDisplay" style="color:#2a55e0;font-weight: 600;">
+<!-- <label class="hidebtn">Invoice Number</label> -->
+<input type="text" class=" form-control" formControlName="NumberDisplay" style="color:#2a55e0;font-weight: 600;">
 </div>
 </div>
 <div class="invbddiv">
@@ -45,8 +45,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class=" exttb" >
-
-        <div class="container" >
+        <div [ngClass]="StylePerScreen()" >
         <div>
           <div class="pagetitle">
             <h5>Customer Details</h5>
@@ -54,45 +53,73 @@
         <div formGroupName="CustomerDetails">
         <div class="address-container">
           <div>
-          <div>
+
+          </div>
+
+
+
+          <div class="aprvl-auto" *ngIf="false">
+            <ng-autocomplete
+              [data]="CustomerData"
+              [searchKeyword]="keyword"
+              placeholder="Search Customer"
+              (selected)='selectEvent($event)'
+              (inputChanged)='onChangeSearch($event)'
+              (inputFocused)='onFocused($event)'
+              [itemTemplate]="itemTemplate"
+              [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+            </ng-template>
+            </div>
+          <div *ngIf="true">
+          <div class="create-form-button" (click)="customerDetailsClear()" style="float: right;padding: 5px 1px;" *ngIf="false">
+            <i class="material-icons">clear</i>
+            <input  class="formbtn" type="button" value="Clear Search">
+          </div>
+          <div >
             <input type="text" style="width: 300px;"
             placeholder="Search for a customer"
             [formControl]="AutocmpCtrl"
             [matAutocomplete]="auto"
-            class="form-controlmse">
-     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handleOptionSelected($event)">
-       <mat-option *ngFor="let customer of CustomerDetailList | async" [value]="customer">
+            (input)="Search()"
+            class="form-control">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="handleOptionSelected($event)">
+          <!-- <mat-option *ngFor="let customer of CustomerDetailList | async" [value]="customer"> -->
+            <mat-option *ngFor="let customer of CustomerData " [value]="customer">
          {{customer.name}}
        </mat-option>
      </mat-autocomplete>
-     <div class="create-form-button" (click)="customerDetailsClear()" style="float: right;">
-      <i class="material-icons">clear</i>
-      <input  class="formbtn" type="button" value="Clear Search">
-    </div>
-          </div>
 
-        </div>
+          </div>
+          </div>
           <label>Customer Name</label>
-          <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Name" >
+          <input type="text" class="form-control" style="width: 300px;" formControlName="Name" >
         </div>
         <div class="address-container">
           <label>TRN</label>
-          <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Vatumber"  >
+          <input type="text" class="form-control" style="width: 300px;"  formControlName="Vatumber"  >
         </div>
         <!-- <div class="address-container">
           <label>Phone</label>
-          <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Phone"  >
+          <input type="text" class="form-control"  formControlName="Phone"  >
         </div>
         <div class="address-container">
           <label>Email</label>
-          <input type="text" class="form-controlmse" style="width: 430px;" formControlName="Email"  >
+          <input type="text" class="form-control"  formControlName="Email"  >
         </div> -->
         <div class="address-container">
           <label>Customer Address</label>
           <div style="display: flex;">
-            <textarea class="form-controlmse" style="width: 430px;" formControlName="Address" ></textarea>
-            <!-- <input type="text" class="form-controlmse" >
-            <input type="text" class="form-controlmse" > -->
+            <textarea class="form-control"  formControlName="Address" style="width: 300px;" ></textarea>
+            <!-- <input type="text" class="form-control" >
+            <input type="text" class="form-control" > -->
           </div>
         </div>
         </div>
@@ -103,9 +130,17 @@
         </div>
         <div>
           <div class="address-container">
+            <!-- <input type="date" class="form-control"  formControlName="EntryDate"> -->
             <label>Invoice Date</label>
-            <!-- <input type="date" class="form-controlmse" style="width: 430px;" formControlName="EntryDate"> -->
-            <div class="custom-mat-form-field descitm" style="margin-left: 11px;width: 430px;height: 33px;">
+            <div class="form-control custom-mat-form-fieldq">
+              <input  [matDatepicker]="picker" #ref1 formControlName="EntryDate"
+                 (dateChange)="ChangeEntryDate(ref1.value)" >
+                 <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <i class="material-icons" matDatepickerToggleIcon>calendar_today</i>
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </div>
+            <div class="custom-mat-form-field descitm" style="margin-left: 11px;width: 288px;height: 33px;" *ngIf="false">
               <input  matInput [matDatepicker]="picker" formControlName="EntryDate"  (click)="openDatePicker(picker)"  #ref1
             (dateChange)="ChangeEntryDate(ref1.value)"  >
               <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
@@ -114,7 +149,7 @@
           </div>
           <div class="address-container" style="pointer-events: none;">
             <label>TRN</label>
-            <input type="text" class="form-controlmse"   [value]="vatNumber"  style="color:#2a55e0;font-weight: 600;width: 430px;" >
+            <input type="text" class="form-control"   [value]="vatNumber"  style="color:#2a55e0;font-weight: 600;width: 300px;" >
           </div>
           <div>
             <mat-checkbox [color]="'primary'"  formControlName="DisableTRN" >Disable TRN</mat-checkbox>

@@ -33,7 +33,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ReactiveFormsModule,
     CommonModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+
   ]
 })
 export class HrmsModule { }
