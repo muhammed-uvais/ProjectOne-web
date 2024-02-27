@@ -16,6 +16,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +43,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CommonModule,
     MatCheckboxModule,
     MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatButtonModule, MatBottomSheetModule,
+    MatListModule
 
   ]
 })

@@ -5,7 +5,7 @@ body {
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #423c3c;
 }
 
 .topnav a {
@@ -18,19 +18,19 @@ body {
 }
 
 .topnav a:hover {
-  background-color: #04AA6D;
+  background-color: #021d75;
   color: black;
 }
 
 /* Create a right-aligned (split) link inside the navigation bar */
 .topnav a.split {
   float: right;
-  background-color: #04AA6D;
+  background-color: #021d75;
   color: white;
   transition: background-color 0.3s, transform 0.3s;
 }
 .topnav a.split:hover{
-  background-color: #32CD32;
+  background-color: #021d75;
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -39,10 +39,11 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #333;
+  background-color: #423c3c;
   color: white;
   text-align: center;
   padding: 10px 16px;
+  display: flex;
 }
 table {
   font-family: arial, sans-serif;
@@ -89,14 +90,11 @@ tr:nth-child(even) {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.scrollable-table {
-  height: 600px; /* Set the desired height for the scrollable div */
-  overflow: auto; /* Enable scrolling */
-}
+
 
  /* Style the scrollbar */
  ::-webkit-scrollbar {
-  width: 15px; /* Adjust the width as desired */
+  width: 10px; /* Adjust the width as desired */
 }
 
 /* Track */
@@ -106,12 +104,12 @@ tr:nth-child(even) {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background-color: #04AA6D; /* Change the handle color as desired */
+  background-color: #021d75; /* Change the handle color as desired */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #04AA6D; /* Change the handle color on hover as desired */
+  background-color: #021d75; /* Change the handle color on hover as desired */
 }
 .logot{
   border : none;
@@ -128,10 +126,10 @@ tr:nth-child(even) {
   background-color: rgb(221, 119, 124);
 }
 .cpbts{
-  border : none;
-  background-color:#04AA6D;
+  border: none;
+  background-color:#021d75;
   color: white;
-  padding : 8px 10px 8px 10px ;
+  padding : 4px ;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
@@ -139,7 +137,7 @@ tr:nth-child(even) {
 }
 .cpbts:hover{
   transform: scale(1.1);
-  background-color: #32CD32;
+  background-color: #021d75;
 }
 .custom-mat-form-field {
   /* Add your custom styles here */
@@ -177,3 +175,36 @@ tr:nth-child(even) {
 
 }
 
+/* Mobile Phones */
+@media only screen and (max-width: 768px) {
+  /* Your styles for mobile phones here */
+  .scrollable-table {
+    height: 700px; /* Set the desired height for the scrollable div */
+    overflow: auto; /* Enable scrolling */
+  }
+}
+
+/* Tablets */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Your styles for tablets here */
+  .scrollable-table {
+    height: 850px; /* Set the desired height for the scrollable div */
+    overflow: auto; /* Enable scrolling */
+  }
+}
+
+/* Desktops and larger screens */
+@media only screen and (min-width: 1025px) {
+  /* Your styles for desktops and larger screens here */
+  .scrollable-table {
+    height: 80%; /* Set the desired height for the scrollable div */
+    overflow: auto; /* Enable scrolling */
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 830px) {
+  .scrollable-table {
+    height: 95%; /* Set the desired height for the scrollable div */
+    overflow: auto; /* Enable scrolling */
+  }
+}

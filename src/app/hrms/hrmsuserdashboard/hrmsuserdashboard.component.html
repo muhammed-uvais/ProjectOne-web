@@ -1,4 +1,5 @@
-<div class="container-fluid" style="padding: 0;">
+<div class="container-fluid" style="padding: 0;overflow: hidden;">
+  <div style="overflow: hidden;">
 <div class="topnav">
   <a class="active" >Invoice List</a>
 <a (click)="NavToInvCreate()"
@@ -21,30 +22,38 @@ class="split" style="border-radius: 5px;margin: 13px 15px 13px 0px;padding: 5px 
   <mat-datepicker #picker1></mat-datepicker>
 </div>
 <div>
-  <button class="btn cpbts" style="padding: 4px 10px 6px 10px;" (click)="GetAll()">Search</button>
+  <button class="btn cpbts" style="padding: 4px 2px 0px 2px" (click)="GetAll()"><i class="material-icons">
+    search
+  </i></button>
 </div>
 </div>
-<div style="padding-right: 5px ;">
-  <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Search"
-  class="form-control">
-</div>
+
 </div>
 <div>
+  <div style="padding-right: 5px ;">
+    <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Search"
+    class="form-control">
+  </div>
+  <div>
 
+
+
+</div>
+
+</div>
+</div>
 <div class="scrollable-table">
 
   <table>
     <tr style="background-color: antiquewhite;">
-      <th></th>
+      <!-- <th></th> -->
       <th>No</th>
       <th>Invoice</th>
       <th>EntryDate</th>
       <th>Customer Name</th>
     </tr>
     <tr *ngFor="let item of filteredData; let i = index" >
-      <td>
-        <mat-checkbox [color]="'red'"></mat-checkbox>
-      </td>
+      <!-- <td><mat-checkbox [color]="'red'"></mat-checkbox></td> -->
       <td (click)="OnitemClicked(item)">{{ i + 1}}</td>
       <td (click)="OnitemClicked(item)">{{item.numberDisplay}}</td>
       <td (click)="OnitemClicked(item)">{{item.entryDate | date:'dd/MM/yyyy'}}</td>
@@ -53,9 +62,8 @@ class="split" style="border-radius: 5px;margin: 13px 15px 13px 0px;padding: 5px 
     </tr>
   </table>
 </div>
-</div>
 <div class="footer">
-  <p style="float: left;padding-right: 150px;">Liwa Adventures</p>
+  <!-- <p style="float: left;padding-right: 150px;">Liwa Adventures</p> -->
   <button  class="logot" style="margin-right: 25px;" (click)="Logout()">Log Out</button>
   <button  class="cpbts" style="margin-right: 25px;" (click)="NavigateToCompany()">Company Settings</button>
   <button  class="cpbts" style="margin-right: 25px;" (click)="NavigateToTax()">Tax Settings</button>

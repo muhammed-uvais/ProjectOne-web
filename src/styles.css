@@ -163,3 +163,74 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.invmaindiv{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:whitesmoke;
+  display: flex;
+  flex-direction: column;
+
+}
+.invheadsec{
+  height: 60px;
+  background-color: white;
+  margin : 10px 10px 10px 10px ;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.invbddiv{
+  border-radius: 5px;
+  background-color: white;
+  margin : 0px 10px 10px 10px ;
+}
+
+.create-form-button {
+  border-radius: 4px;
+  background-color: #021d75;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border: 0;
+  float: left;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding-left: 3px;
+  margin-left:10px;
+  margin-right: 5px;
+}
+.formbtn{
+  outline: none;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.pageheader{
+  font-size: 18px;
+  color: #021d75;
+  font-weight: 500;
+  margin-top: 16px;
+}
+.exttb{
+  display: flex;
+  flex-direction: row;
+}
+.invnumbrdisply{
+  pointer-events: none;
+    margin-right: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
